@@ -1,5 +1,5 @@
 {
-    "name": "qandidate/stack-request-id",
+    "name": "darsyn/stack-request-id",
     "description": "Middleware for adding request id to Symfony Request.",
     "license": "MIT",
     "require": {
@@ -19,14 +19,18 @@
         {
             "name": "Qandidate.com",
             "homepage": "http://labs.qandidate.com/"
+        },
+        {
+            "name": "Zander Baldwin",
+            "email": "hello@zanderbaldwin.com"
         }
     ],
     "suggest": {
         "symfony/monolog-bundle": "For registering the MonologProcessor"
     },
     "autoload": {
-        "psr-0": {
-            "Qandidate\\Stack": "src/"
+        "psr-4": {
+            "Darsyn\\Stack\\RequestId\\": "src/"
         }
     }
 }
