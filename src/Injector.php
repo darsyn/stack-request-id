@@ -14,7 +14,7 @@ class Injector implements HttpKernelInterface
 
     /**
      * @access private
-     * @var \Darsyn\Stack\RequestIdGenerator
+     * @var \Darsyn\Stack\RequestId\GeneratorInterface
      */
     private $generator;
 
@@ -35,13 +35,13 @@ class Injector implements HttpKernelInterface
      *
      * @access public
      * @param \Symfony\Component\HttpKernel\HttpKernelInterface $app
-     * @param \Darsyn\Stack\RequestIdGenerator $generator
+     * @param \Darsyn\Stack\RequestId\GeneratorInterface $generator
      * @param string $header
      * @param boolean $respond
      */
     public function __construct(
         HttpKernelInterface $app,
-        RequestIdGenerator $generator,
+        GeneratorInterface $generator,
         $header = 'X-Request-Id',
         $respond = true
     ) {
