@@ -1,21 +1,23 @@
-stack-request-id
-=====
-Middleware for adding a request id to your Symfony Requests
+Request ID for Stack
+====================
 
-[![Build Status](https://travis-ci.org/qandidate-labs/stack-request-id.svg?branch=master)](https://travis-ci.org/qandidate-labs/stack-request-id)
+Middleware for adding a request ID to your Symfony requests.
+
+[![Build Status](https://travis-ci.org/darsyn/stack-request-id.svg?branch=master)](https://travis-ci.org/darsyn/stack-request-id)
 
 ## Installation
+
 First, add this project to your project's composer.json
 
-```
-$ composer require qandidate/stack-request-id ~0.1.0
+```bash
+$ composer require darsyn/stack-request-id ^1.0
 ```
 
 ## Setting up
 Update your `app.php` to include the middleware:
 
 Before:
-```php5
+```php
 use Symfony\Component\HttpFoundation\Request;
 
 $kernel = new AppKernel($env, $debug);
@@ -28,15 +30,15 @@ $kernel->terminate($request, $response);
 ```
 
 After:
-```php5
-use Qandidate\Stack\RequestId;
-use Qandidate\Stack\UuidRequestIdGenerator;
+```php
+use Darsyn\Stack\RequestId\Injector;
+use Darsyn\Stack\RequestId\UuidGenerator;
 use Symfony\Component\HttpFoundation\Request;
 
 $kernel = new AppKernel($env, $debug);
 
-// Stack it!
-$generator = new UuidRequestIdGenerator(1337);
+// Stack it! Node name is optional.
+$generator = new UuidGenerator($nodeName);
 $stack = new RequestId($kernel, $generator);
 
 $kernel->loadClassCache();
@@ -47,29 +49,33 @@ $response->send();
 $kernel->terminate($request, $response);
 ```
 
-## Adding the request id to your monolog logs
-If you use Symfony's [MonologBundle] you can add the request id to your monolog logs by adding the following service definition to your services.xml file:
+## Adding the RequestId to your Monolog logs
 
-```XML
-<service id="qandidate.stack.request_id.monolog_processor" class="Qandidate\Stack\RequestId\MonologProcessor">
-  <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="255" />
-  <tag name="monolog.processor" />
-</service>
+If you use Symfony's [MonologBundle] you can add the request ID to your Monolog logs by adding the following service
+definition to your services.yml file:
+
+```yaml
+services:
+
+    darsyn.stack.request_id.monolog_processor:
+        class: Darsyn\Stack\RequestId\Monolog\Processor
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 255 }
+            - { name: monolog.processor }
+```
+
+## Changing the Response Header
+
+The default is `X-Request-Id`.
+
+```php
+$stack = new RequestId($kernel, $generator, 'Request-Id');
+```
+
+## Disabling the Response Header
+
+```php
+$stack = new RequestId($kernel, $generator, null, false);
 ```
 
 [MonologBundle]: https://github.com/symfony/MonologBundle
-
-## Adding the request id to responses
-If you need to send the request id back with the response you can enable the response header:
-
-```php5
-$generator = new UuidRequestIdGenerator(1337);
-$stack = new RequestId($kernel, $generator);
-$stack->enableResponseHeader();
-```
-
-It is also possible to change response header's name:
-
-```php5
-$stack->enableResponseHeader('My-Custom-Request-Id');
-```
