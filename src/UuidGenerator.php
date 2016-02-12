@@ -1,4 +1,5 @@
 <?php
+
 namespace Darsyn\Stack\RequestId;
 
 use Rhumsaa\Uuid\Uuid;

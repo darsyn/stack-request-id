@@ -1,4 +1,5 @@
 <?php
+
 namespace Darsyn\Stack\RequestId;
 
 interface GeneratorInterface

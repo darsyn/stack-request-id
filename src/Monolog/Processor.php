@@ -1,4 +1,5 @@
 <?php
+
 namespace Darsyn\Stack\RequestId\Monolog;
 
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;

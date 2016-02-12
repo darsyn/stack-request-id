@@ -1,4 +1,5 @@
 <?php
+
 namespace Darsyn\Stack\RequestId;
 
 use Symfony\Component\HttpFoundation\Request;

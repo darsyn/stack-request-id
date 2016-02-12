@@ -1,12 +1,7 @@
 {
     "name": "darsyn/stack-request-id",
-    "description": "Middleware for adding request id to Symfony Request.",
+    "description": "Middleware for adding a request ID to Symfony Request.",
     "license": "MIT",
-    "require": {
-        "symfony/http-kernel": "~2.1",
-        "symfony/http-foundation": "~2.1",
-        "ramsey/uuid": "~2.0"
-    },
     "authors": [
         {
             "name": "Alexander",
@@ -25,12 +20,17 @@
             "email": "hello@zanderbaldwin.com"
         }
     ],
-    "suggest": {
-        "symfony/monolog-bundle": "For registering the MonologProcessor"
-    },
     "autoload": {
         "psr-4": {
             "Darsyn\\Stack\\RequestId\\": "src/"
         }
+    },
+    "require": {
+        "symfony/http-kernel": "~2.1",
+        "symfony/http-foundation": "~2.1",
+        "ramsey/uuid": "~2.0"
+    },
+    "suggest": {
+        "symfony/monolog-bundle": "For registering the MonologProcessor"
     }
 }
