@@ -2,14 +2,14 @@
 
 namespace Darsyn\Stack\RequestId;
 
-use Rhumsaa\Uuid\Uuid;
+use Ramsey\Uuid\Uuid;
 
 class UuidGenerator implements GeneratorInterface
 {
     private $nodeId;
 
     /**
-     * @param null|string|integer $nodeId
+     * @param scalar $nodeId
      */
     public function __construct($nodeId = null)
     {

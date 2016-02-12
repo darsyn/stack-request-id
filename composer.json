@@ -26,9 +26,9 @@
         }
     },
     "require": {
-        "symfony/http-kernel": "~2.1",
-        "symfony/http-foundation": "~2.1",
-        "ramsey/uuid": "~2.0"
+        "symfony/http-kernel": "^2.8|^3.0",
+        "symfony/http-foundation": "^2.8|^3.0",
+        "ramsey/uuid": "^3.0"
     },
     "suggest": {
         "symfony/monolog-bundle": "For registering the MonologProcessor"
