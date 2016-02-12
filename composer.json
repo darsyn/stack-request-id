@@ -30,6 +30,11 @@
         "symfony/http-foundation": "^2.8|^3.0",
         "ramsey/uuid": "^3.0"
     },
+    "autoload-dev": {
+        "psr-4": {
+            "DarsynTests\\Stack\\RequestId\\": "tests/"
+        }
+    },
     "suggest": {
         "symfony/monolog-bundle": "For registering the MonologProcessor"
     }
