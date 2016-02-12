@@ -1,12 +1,7 @@
 {
-    "name": "qandidate/stack-request-id",
-    "description": "Middleware for adding request id to Symfony Request.",
+    "name": "darsyn/stack-request-id",
+    "description": "Middleware for adding a request ID to Symfony Request.",
     "license": "MIT",
-    "require": {
-        "symfony/http-kernel": "~2.1",
-        "symfony/http-foundation": "~2.1",
-        "ramsey/uuid": "~2.0"
-    },
     "authors": [
         {
             "name": "Alexander",
@@ -19,14 +14,28 @@
         {
             "name": "Qandidate.com",
             "homepage": "http://labs.qandidate.com/"
+        },
+        {
+            "name": "Zander Baldwin",
+            "email": "hello@zanderbaldwin.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Darsyn\\Stack\\RequestId\\": "src/"
+        }
+    },
+    "require": {
+        "symfony/http-kernel": "^2.8|^3.0",
+        "symfony/http-foundation": "^2.8|^3.0",
+        "ramsey/uuid": "^3.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DarsynTests\\Stack\\RequestId\\": "tests/"
+        }
+    },
     "suggest": {
         "symfony/monolog-bundle": "For registering the MonologProcessor"
-    },
-    "autoload": {
-        "psr-0": {
-            "Qandidate\\Stack": "src/"
-        }
     }
 }

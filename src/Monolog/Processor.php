@@ -1,27 +1,27 @@
 <?php
 
-/*
- * This file is part of the qandidate/stack-request-id package.
- *
- * (c) Qandidate.com <opensource@qandidate.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-namespace Qandidate\Stack\RequestId;
+namespace Darsyn\Stack\RequestId\Monolog;
 
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
-/**
- * Processor to add the request id to monolog records.
- */
-class MonologProcessor
+class Processor
 {
+    /**
+     * @access private
+     * @var string
+     */
     private $header;
+
+    /**
+     * @access private
+     * @var string
+     */
     private $requestId;
 
     /**
+     * Constructor
+     *
+     * @access public
      * @param string $header
      */
     public function __construct($header = 'X-Request-Id')
@@ -29,18 +29,31 @@ class MonologProcessor
         $this->header = $header;
     }
 
+    /**
+     * Event: On Kernel Request
+     *
+     * @access public
+     * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+     * @return void
+     */
     public function onKernelRequest(GetResponseEvent $event)
     {
         $request         = $event->getRequest();
         $this->requestId = $request->headers->get($this->header, false);
     }
 
+    /**
+     * Magic Method: Invoke
+     *
+     * @access public
+     * @param array $record
+     * @return array
+     */
     public function __invoke(array $record)
     {
         if ($this->requestId) {
             $record['extra']['request_id'] = $this->requestId;
         }
-
         return $record;
     }
 }
