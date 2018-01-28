@@ -39,7 +39,7 @@ $kernel = new AppKernel($env, $debug);
 
 // Stack it! Node name is optional.
 $generator = new UuidGenerator($nodeName);
-$stack = new RequestId($kernel, $generator);
+$stack = new Injector($kernel, $generator);
 
 $kernel->loadClassCache();
 
@@ -69,13 +69,13 @@ services:
 The default is `X-Request-Id`.
 
 ```php
-$stack = new RequestId($kernel, $generator, 'Request-Id');
+$stack = new Injector($kernel, $generator, 'Request-Id');
 ```
 
 ## Disabling the Response Header
 
 ```php
-$stack = new RequestId($kernel, $generator, null, false);
+$stack = new Injector($kernel, $generator, null, false);
 ```
 
 [MonologBundle]: https://github.com/symfony/MonologBundle
